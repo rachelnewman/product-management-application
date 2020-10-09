@@ -24,15 +24,30 @@ public class ProductService {
 
     @PostConstruct
     public void loadData() {
-        String fileName = "src/main/resources/products.csv";
-        Path myPath = Paths.get(fileName);
-
-        try (BufferedReader br = Files.newBufferedReader(myPath,
+        String productsFileName = "src/main/resources/products.csv";
+        Path productsPath = Paths.get(productsFileName);
+        String categoriesFileName = "src/main/resources/products.csv";
+        Path categoriesPath = Paths.get(categoriesFileName);
+        try (BufferedReader productsbr = Files.newBufferedReader(productsPath,
                 StandardCharsets.UTF_8)) {
             HeaderColumnNameMappingStrategy<Product> strategy
                     = new HeaderColumnNameMappingStrategy<>();
             strategy.setType(Product.class);
-            CsvToBean<Product> csvToBean = new CsvToBeanBuilder<Product>(br)
+            CsvToBean<Product> csvToBean = new CsvToBeanBuilder<Product>(productsbr)
+                    .withMappingStrategy(strategy)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            products = csvToBean.parse();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        try (BufferedReader categoriesbr = Files.newBufferedReader(categoriesPath,
+                StandardCharsets.UTF_8)) {
+            HeaderColumnNameMappingStrategy<Product> strategy
+                    = new HeaderColumnNameMappingStrategy<>();
+            strategy.setType(Product.class);
+            CsvToBean<Product> csvToBean = new CsvToBeanBuilder<Product>(categoriesbr)
                     .withMappingStrategy(strategy)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
