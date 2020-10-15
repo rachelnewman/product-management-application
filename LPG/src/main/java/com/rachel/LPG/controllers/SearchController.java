@@ -6,9 +6,12 @@ import com.rachel.LPG.services.SearchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
+
 @RestController
 @RequestMapping("search")
 public class SearchController {
@@ -19,12 +22,15 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @GetMapping("{searchTerm}")
-    public SearchResponse search(@PathVariable("searchTerm") String searchTerm) {
-        List<Product> results = searchService.searchProducts(searchTerm);
+    @GetMapping(value = {"", "{searchTerm}"})
+    public SearchResponse search(@PathVariable(required = false) String searchTerm, @RequestParam(required = false) String sortby) {
+        List<Product> results;
+        if (sortby == null) { results = searchService.searchProducts(Objects.requireNonNullElse(searchTerm, ""));}
+        else { results = searchService.searchProductsAndSort(searchTerm, sortby);}
         SearchResponse response = new SearchResponse();
         response.setProducts(results);
-
         return response;
     }
+
+
 }

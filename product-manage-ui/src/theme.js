@@ -6,7 +6,10 @@ export default {
     error: "red",
   },
   typography: {
-    lineHeight: "1.5em",
+    lineHeight: {
+      base: "1.5em",
+      medium: "2em",
+    },
     fontSize: {
       base: "1em",
     },

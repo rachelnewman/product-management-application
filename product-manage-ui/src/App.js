@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  useParams,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import SearchBar from "./Components/SearchBar/SearchBar";
-import List from "./Components/List";
-import { executeSearch } from "./services/productService";
+import List from "./Components/List/List";
+import { executeSearch, sortSearch } from "./services/productService";
 import logo from "./logo.svg";
 
 import * as Styled from "./styles";
 const App = () => {
   const [productList, setProductList] = useState([]);
   const [error, setError] = useState("");
-  // const params = URLSearchParams();
-  // useEffect(() => executeSearch(searchterm, setProductList, setError), []);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const onSearch = (newSearchTerm) => {
     executeSearch(newSearchTerm, setProductList, setError);
+    setSearchTerm(newSearchTerm);
+  };
+  const onSort = (sortby) => {
+    sortSearch(searchTerm, sortby, setProductList, setError);
   };
   return (
     <Router>
@@ -26,17 +25,15 @@ const App = () => {
           <a href="/">
             <Styled.Logo src={logo} />
           </a>
-          <SearchBar handleSearch={onSearch} />
+          <SearchBar handleSearch={onSearch} currentSearchTerm={searchTerm} />
         </Styled.Header>
 
-        <div>
-          {error && <div>Oops! Looks like something went wrong: {error}</div>}
-          <Switch>
-            <Route path="/search/:searchterm">
-              <List productList={productList} />
-            </Route>
-          </Switch>
-        </div>
+        {error && <div>Oops! Looks like something went wrong: {error}</div>}
+        <Switch>
+          <Route path="/search/:searchterm?">
+            <List handleSort={onSort} productList={productList} />
+          </Route>
+        </Switch>
       </Styled.Container>
     </Router>
   );
