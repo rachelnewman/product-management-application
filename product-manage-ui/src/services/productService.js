@@ -15,8 +15,12 @@ export const executeSearch = (search, setProductList, setError) => {
 };
 
 export const sortSearch = (search, sortby, setProductList, setError) => {
+  let sort = sortby;
+  if (sortby.includes("size")) {
+    sort = sortby.includes("ascending") ? "size-asc" : "size-desc";
+  }
   axios
-    .get(SERVICE_ENDPOINT + SEARCH_MAPPING + `/${search}?sortby=${sortby}`)
+    .get(SERVICE_ENDPOINT + SEARCH_MAPPING + `/${search.trim()}?sortby=${sort}`)
     .then((res) => {
       setError(null);
       setProductList(res.data.products);

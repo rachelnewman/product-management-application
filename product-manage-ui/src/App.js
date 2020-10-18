@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import SearchBar from "./Components/SearchBar/SearchBar";
 import List from "./Components/List/List";
+import Home from "./Components/Home/Home";
 import { executeSearch, sortSearch } from "./services/productService";
-import logo from "./logo.svg";
+import logo from "./catalog.svg";
 
 import * as Styled from "./styles";
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
   };
   return (
     <Router>
+      <Styled.GlobalStyle />
+
       <Styled.Container>
         <Styled.Header>
           <a href="/">
@@ -28,8 +31,15 @@ const App = () => {
           <SearchBar handleSearch={onSearch} currentSearchTerm={searchTerm} />
         </Styled.Header>
 
-        {error && <div>Oops! Looks like something went wrong: {error}</div>}
+        {error && (
+          <Styled.Error>
+            Oops! Looks like something went wrong: {error}
+          </Styled.Error>
+        )}
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route path="/search/:searchterm?">
             <List handleSort={onSort} productList={productList} />
           </Route>

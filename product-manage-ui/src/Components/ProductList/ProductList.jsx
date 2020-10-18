@@ -1,15 +1,28 @@
 import React from "react";
 import * as Styled from "./styles";
-export default ({ productList }) => {
-  if (!productList) return null;
-  if (!productList.length) {
+
+export default ({ productList = [] }) => {
+  if (!productList?.length) {
     return (
       <Styled.ListWrapper>
-        There aren't any product that match your search term! 😥
+        There aren't any products that match your search term!
+        <span role="img" aria-hidden={true}>
+          😥
+        </span>
       </Styled.ListWrapper>
     );
   }
-  return productList.map((product) => (
-    <div key={product.id}>{product.name}</div>
-  ));
+  return (
+    <Styled.ListWrapper>
+      {productList.map((product) => (
+        <Styled.ProductCard
+          category={product.categoryName.replace(" ", "").toLowerCase()}
+          key={product.id}
+        >
+          <div>{product.name}</div>
+          <div>{product.categoryName}</div>
+        </Styled.ProductCard>
+      ))}
+    </Styled.ListWrapper>
+  );
 };

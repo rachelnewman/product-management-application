@@ -36,7 +36,12 @@ public class SearchService {
             case "category":
                 Collections.sort(results, new SortByCategory());
                 break;
-            case "size":
+            case "size-desc":
+                Collections.sort(results, new SortBySize());
+                Collections.reverse(results);
+
+                break;
+            case "size-asc":
                 Collections.sort(results, new SortBySize());
                 break;
         }

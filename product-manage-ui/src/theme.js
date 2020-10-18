@@ -1,17 +1,26 @@
 export default {
   colors: {
-    primary: "blue",
-    secondary: "teal",
+    primary: "#1C1970",
+    secondary: "#40D6E6",
     white: "#fff",
-    error: "red",
+    error: "#CC0000",
+    categories: {
+      washroom: "#31C3E7",
+      electric: "#ADB6B5",
+      powertools: "#266A2E",
+      kitchen: "#593E1A",
+      furniture: "#6B78B4",
+    },
   },
   typography: {
     lineHeight: {
-      base: "1.5em",
-      medium: "2em",
+      10: "1.5em",
+      30: "2em",
     },
     fontSize: {
-      base: "1em",
+      10: "1em",
+      30: "1.5em",
+      50: "2em",
     },
     font: "Arial",
   },

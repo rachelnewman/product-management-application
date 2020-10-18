@@ -25,8 +25,12 @@ public class SearchController {
     @GetMapping(value = {"", "{searchTerm}"})
     public SearchResponse search(@PathVariable(required = false) String searchTerm, @RequestParam(required = false) String sortby) {
         List<Product> results;
-        if (sortby == null) { results = searchService.searchProducts(Objects.requireNonNullElse(searchTerm, ""));}
-        else { results = searchService.searchProductsAndSort(searchTerm, sortby);}
+        if (sortby == null) {
+            results = searchService
+                    .searchProducts(Objects.requireNonNullElse(searchTerm, ""));}
+        else {
+            results = searchService
+                    .searchProductsAndSort(searchTerm, sortby);}
         SearchResponse response = new SearchResponse();
         response.setProducts(results);
         return response;

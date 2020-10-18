@@ -11,7 +11,13 @@ export const ListerHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
 `;
-
-export const SortBy = styled.select``;
+export const ListTools = styled.div`
+  padding: 5px 5px 5px 0;
+`;
+export const SortBy = styled.select`
+  margin-left: 5px;
+`;
 export const SortOption = styled.option``;

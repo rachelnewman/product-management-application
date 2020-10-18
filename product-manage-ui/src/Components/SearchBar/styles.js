@@ -14,17 +14,18 @@ const Input = styled.input`
   width: 100%;
   border-radius: 3px 0 0 3px;
   border-color: ${(props) => props.theme.colors.secondary};
-  border-style: solid;
+  border-style: none;
+  font-size: ${(props) => props.theme.typography.fontSize[50]};
 `;
 
 const Button = styled.button`
   background-color: ${(props) => props.theme.colors.secondary};
   border-color: ${(props) => props.theme.colors.secondary};
   border-radius: 0 3px 3px 0;
-  border-style: solid;
-
-  color: ${(props) => props.theme.colors.white};
-  line-height: ${(props) => props.theme.typography.lineHeight.medium};
+  border-style: none;
+  color: ${(props) => props.theme.colors.primary};
+  line-height: ${(props) => props.theme.typography.lineHeight[10]};
+  font-size: ${(props) => props.theme.typography.fontSize[30]};
   margin-left: -2px;
 `;
 

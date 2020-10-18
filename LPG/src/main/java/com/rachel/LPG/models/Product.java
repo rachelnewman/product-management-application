@@ -30,7 +30,5 @@ public class Product implements Comparable<Product>{
     public int compareTo(Product p) {
         return this.getName().toLowerCase().compareTo((p).getName().toLowerCase());
     }
-
-
 }
 

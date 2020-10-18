@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import * as Styled from "./styles";
 import { withRouter } from "react-router-dom";
