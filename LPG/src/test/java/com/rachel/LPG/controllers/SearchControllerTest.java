@@ -1,4 +1,4 @@
-package com.rachel.LPG.models;
+package com.rachel.LPG.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
