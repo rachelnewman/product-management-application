@@ -4,7 +4,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import List from "./Components/List/List";
 import Home from "./Components/Home/Home";
 import { executeSearch, sortSearch } from "./services/productService";
-import logo from "./catalog.svg";
+import logo from "./Components/Icons/catalog.svg";
 
 import * as Styled from "./styles";
 const App = () => {
